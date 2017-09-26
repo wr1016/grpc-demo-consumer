@@ -1,0 +1,35 @@
+server:
+  context-path: ""
+  port: 10010
+  undertow:
+    io-threads: 2
+    worker-threads: 200
+
+#重要：如何发现provider
+grpc:
+  client:
+    # 将要链接到的provideer名称
+    grpc-demo-provider:
+      serverHost: 127.0.0.1
+      serverPort: 9898
+      enable-keep-alive: true
+      keep-alive-delay: 5 # seconds
+
+spring:
+  jackson:
+    generator:
+      WRITE_NUMBERS_AS_STRINGS: true
+  application:
+    name: grpc-demo-consumer
+#cors:
+#  mappings: /**
+#  allowedOrigins:
+#undertow config optimize
+
+logging:
+  level:
+    cn.vpclub: INFO
+  pattern:
+    console: "%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{36})  - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file: logs/application.log
